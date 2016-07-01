@@ -1,99 +1,290 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>在终端配置ssh免密码登录 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明总是需要登录服务器部署项目。直接使用Terminal来进行ssh连接，每次都要输入ip + port + name + password 好烦。配置一下实现快速登录。
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="说明总是需要登录服务器部署项目。直接使用Terminal来进行ssh连接，每次都要输入ip + port + name + password 好烦。配置一下实现快速登录。
 step_1由于可能有多个项目，需要配置一些环境变量。之前都是直接写在~/.bash_profile 或 ~/.zshrc。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。
 1234567891011">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在终端配置ssh免密码登录">
 <meta property="og:url" content="http://yoursite.com/2016/07/01/My-New-Post/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Mx-Don">
 <meta property="og:description" content="说明总是需要登录服务器部署项目。直接使用Terminal来进行ssh连接，每次都要输入ip + port + name + password 好烦。配置一下实现快速登录。
 step_1由于可能有多个项目，需要配置一些环境变量。之前都是直接写在~/.bash_profile 或 ~/.zshrc。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。
 1234567891011">
-<meta property="og:updated_time" content="2016-07-01T09:55:51.000Z">
+<meta property="og:updated_time" content="2016-07-01T10:27:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在终端配置ssh免密码登录">
 <meta name="twitter:description" content="说明总是需要登录服务器部署项目。直接使用Terminal来进行ssh连接，每次都要输入ip + port + name + password 好烦。配置一下实现快速登录。
 step_1由于可能有多个项目，需要配置一些环境变量。之前都是直接写在~/.bash_profile 或 ~/.zshrc。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。
 1234567891011">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
 
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/01/My-New-Post/"/>
+
+  <title> 在终端配置ssh免密码登录 | Mx-Don </title>
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/01/My-New-Post/" class="article-date">
-  <time datetime="2016-07-01T09:52:21.000Z" itemprop="datePublished">2016-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      在终端配置ssh免密码登录
-    </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
 
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mx-Don</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                在终端配置ssh免密码登录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-01T17:52:21+08:00" content="2016-07-01">
+              2016-07-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>总是需要登录服务器部署项目。<br>直接使用Terminal来进行ssh连接，<br>每次都要输入ip + port + name + password 好烦。<br>配置一下实现快速登录。</p>
 <h2 id="step-1"><a href="#step-1" class="headerlink" title="step_1"></a>step_1</h2><p>由于可能有多个项目，需要配置一些环境变量。<br>之前都是直接写在<code>~/.bash_profile</code> 或 <code>~/.zshrc</code>。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 比如，我在Work文件夹中创建了一个名为config的新文件夹。</div><div class="line"># 为每个项目创建一个 xx.sh文件：</div><div class="line">ocam.sh</div><div class="line">hive.sh</div><div class="line"></div><div class="line"></div><div class="line"># 然后在`~/.bash_profile` 或 `~/.zshrc` 里把这些项目的配置文件加进来。</div><div class="line">for file in /Work/config/*.sh; do</div><div class="line">  source $file;</div><div class="line">done</div><div class="line"></div><div class="line"># 这样就把每个文件给加进来了。</div><div class="line"># ps:这些配置文件还有个大作用，为每个项目取相应操作的别名。</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 比如，我在Work文件夹中创建了一个名为config的新文件夹。</span></div><div class="line"><span class="comment"># 为每个项目创建一个 xx.sh文件：</span></div><div class="line">ocam.sh</div><div class="line">hive.sh</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 然后在`~/.bash_profile` 或 `~/.zshrc` 里把这些项目的配置文件加进来。</span></div><div class="line"><span class="keyword">for</span> file <span class="keyword">in</span> /Work/config/*.sh; <span class="keyword">do</span></div><div class="line">  source $file;</div><div class="line">done</div><div class="line"></div><div class="line"><span class="comment"># 这样就把每个文件给加进来了。</span></div><div class="line"><span class="comment"># ps:这些配置文件还有个大作用，为每个项目取相应操作的别名。</span></div></pre></td></tr></table></figure>
 <h2 id="step-2"><a href="#step-2" class="headerlink" title="step_2"></a>step_2</h2><p>生成公钥/密钥对</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">cd ~/.ssh</div><div class="line"></div><div class="line"># C是注释，f是文件名（不同项目使用不同的文件名）</div><div class="line">ssh-keygen -t rsa -C ocam -f ocam_id_rsa </div><div class="line"></div><div class="line"># 指定不同服务器使用不同的公钥/密钥对</div><div class="line"># 在ssh_config中配置。（ssh_config不存在新增即可）</div><div class="line"></div><div class="line">Host 111.22.333.44</div><div class="line">PreferredAuthentications publickey</div><div class="line">IdentityFile ~/.ssh/ocam_id_rsa</div><div class="line">Port 99</div></pre></td></tr></table></figure>
 <h2 id="step-3"><a href="#step-3" class="headerlink" title="step_3"></a>step_3</h2><p>将生成的<code>公钥</code>放到服务器。</p>
@@ -103,115 +294,281 @@ step_1由于可能有多个项目，需要配置一些环境变量。之前都�
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/01/My-New-Post/" data-id="ciq3ka4eb0000sfp3zp894l7k" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
 
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/01/Day-One/" rel="prev" title="Day-One">
+                Day-One <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-  
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-<nav id="article-nav">
-  
-  
-    <a href="/2016/07/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
+  </div>
 
-  
-</article>
 
-</section>
+        </div>
         
-          <aside id="sidebar">
+          
   
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a>
-    </div>
-  </div>
+      
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2016/07/01/My-New-Post/">在终端配置ssh免密码登录</a>
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
           </li>
-        
-          <li>
-            <a href="/2016/07/01/hello-world/">Hello World</a>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
           </li>
-        
-      </ul>
-    </div>
-  </div>
+        </ul>
+      
 
-  
-</aside>
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/hexo_avatar.png"
+               alt="chenxiaodong" />
+          <p class="site-author-name" itemprop="name">chenxiaodong</p>
+          <p class="site-description motion-element" itemprop="description">人生如逆旅，我亦是行人。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-1"><span class="nav-number">2.</span> <span class="nav-text">step_1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-2"><span class="nav-number">3.</span> <span class="nav-text">step_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-3"><span class="nav-number">4.</span> <span class="nav-text">step_3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-4"><span class="nav-number">5.</span> <span class="nav-text">step_4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-5"><span class="nav-number">6.</span> <span class="nav-text">step_5</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <footer id="footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 chenxiaodong<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenxiaodong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
     </div>
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-</nav>
-    
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
 
 
-<script src="/js/script.js"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  </div>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
 </body>
 </html>
