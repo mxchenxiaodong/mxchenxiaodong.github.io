@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在终端配置ssh免密码登录 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明总是需要登录服务器部署项目。直接使用Terminal来进行ssh连接，每次都要输入ip + port + name + password 好烦。配置一下实现快速登录。
+step_1由于可能有多个项目，需要配置一些环境变量。之前都是直接写在~/.bash_profile 或 ~/.zshrc。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。
+1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在终端配置ssh免密码登录">
+<meta property="og:url" content="http://yoursite.com/2016/07/01/My-New-Post/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="说明总是需要登录服务器部署项目。直接使用Terminal来进行ssh连接，每次都要输入ip + port + name + password 好烦。配置一下实现快速登录。
+step_1由于可能有多个项目，需要配置一些环境变量。之前都是直接写在~/.bash_profile 或 ~/.zshrc。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。
+1234567891011">
+<meta property="og:updated_time" content="2016-07-01T09:55:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在终端配置ssh免密码登录">
+<meta name="twitter:description" content="说明总是需要登录服务器部署项目。直接使用Terminal来进行ssh连接，每次都要输入ip + port + name + password 好烦。配置一下实现快速登录。
+step_1由于可能有多个项目，需要配置一些环境变量。之前都是直接写在~/.bash_profile 或 ~/.zshrc。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。
+1234567891011">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/01/My-New-Post/" class="article-date">
+  <time datetime="2016-07-01T09:52:21.000Z" itemprop="datePublished">2016-07-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在终端配置ssh免密码登录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>总是需要登录服务器部署项目。<br>直接使用Terminal来进行ssh连接，<br>每次都要输入ip + port + name + password 好烦。<br>配置一下实现快速登录。</p>
+<h2 id="step-1"><a href="#step-1" class="headerlink" title="step_1"></a>step_1</h2><p>由于可能有多个项目，需要配置一些环境变量。<br>之前都是直接写在<code>~/.bash_profile</code> 或 <code>~/.zshrc</code>。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 比如，我在Work文件夹中创建了一个名为config的新文件夹。</div><div class="line"># 为每个项目创建一个 xx.sh文件：</div><div class="line">ocam.sh</div><div class="line">hive.sh</div><div class="line"></div><div class="line"></div><div class="line"># 然后在`~/.bash_profile` 或 `~/.zshrc` 里把这些项目的配置文件加进来。</div><div class="line">for file in /Work/config/*.sh; do</div><div class="line">  source $file;</div><div class="line">done</div><div class="line"></div><div class="line"># 这样就把每个文件给加进来了。</div><div class="line"># ps:这些配置文件还有个大作用，为每个项目取相应操作的别名。</div></pre></td></tr></table></figure>
+<h2 id="step-2"><a href="#step-2" class="headerlink" title="step_2"></a>step_2</h2><p>生成公钥/密钥对</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">cd ~/.ssh</div><div class="line"></div><div class="line"># C是注释，f是文件名（不同项目使用不同的文件名）</div><div class="line">ssh-keygen -t rsa -C ocam -f ocam_id_rsa </div><div class="line"></div><div class="line"># 指定不同服务器使用不同的公钥/密钥对</div><div class="line"># 在ssh_config中配置。（ssh_config不存在新增即可）</div><div class="line"></div><div class="line">Host 111.22.333.44</div><div class="line">PreferredAuthentications publickey</div><div class="line">IdentityFile ~/.ssh/ocam_id_rsa</div><div class="line">Port 99</div></pre></td></tr></table></figure>
+<h2 id="step-3"><a href="#step-3" class="headerlink" title="step_3"></a>step_3</h2><p>将生成的<code>公钥</code>放到服务器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/ocam_id_rsa.pub | ssh -t root@111.22.333.44 -p 99 &apos;cat &gt;&gt; .ssh/authorized_keys&apos;</div></pre></td></tr></table></figure>
+<h2 id="step-4"><a href="#step-4" class="headerlink" title="step_4"></a>step_4</h2><p>在第一步创建的ocam.sh中,添加进入服务器的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">alias ocam_test_server=&quot;ssh -t root@111.22.333.44 -p 99&quot;</div><div class="line"></div><div class="line">PS:</div><div class="line">使用简单易记的命令来代替复杂的命令。</div><div class="line">比如：启动redis实例， 启动webpack</div><div class="line">alias ocam_js=&quot;sh Work/ocam/run_script.sh&quot; # webpack</div><div class="line">alias ocam_db=&quot;sh Work/ocam/run_db_script.sh&quot; # 重置数据库</div><div class="line">alias ocam_redis=&quot;sh Work/ocam/run_redis_script.sh&quot; # 启动redis实例</div></pre></td></tr></table></figure></p>
+<h2 id="step-5"><a href="#step-5" class="headerlink" title="step_5"></a>step_5</h2><p>以后如果要登录某个项目的服务器，直接打开Terminal, 执行<code>ocam_test_server</code>就可以了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/01/My-New-Post/" data-id="ciq3ka4eb0000sfp3zp894l7k" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/01/My-New-Post/">在终端配置ssh免密码登录</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/01/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 chenxiaodong<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
