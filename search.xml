@@ -4,6 +4,12 @@
   
     
     <entry>
+      <title><![CDATA[有趣的事情]]></title>
+      <url>http://yoursite.com/2016/07/05/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%8B%E6%83%85/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[传说]]></title>
       <url>http://yoursite.com/2016/07/03/%E4%BC%A0%E8%AF%B4/</url>
       <content type="html"><![CDATA[<p>在北美有个部落，他们相信世界上的一切生灵都存在灵魂。<br>它是一种缩小了的依附在躯体内的原我。</p>
@@ -18,9 +24,17 @@
     </entry>
     
     <entry>
-      <title><![CDATA[我家大人]]></title>
-      <url>http://yoursite.com/2016/07/03/%E6%88%91%E5%AE%B6%E5%A4%A7%E4%BA%BA/</url>
-      <content type="html"></content>
+      <title><![CDATA[一只神奇的猪]]></title>
+      <url>http://yoursite.com/2016/07/03/%E4%B8%80%E5%8F%AA%E7%A5%9E%E5%A5%87%E7%9A%84%E7%8C%AA/</url>
+      <content type="html"><![CDATA[<p>你的表现，总是完美得令人无话可说。<br><a id="more"></a></p>
+<h2 id="礼物"><a href="#礼物" class="headerlink" title="礼物"></a>礼物</h2><p>很多时候，我打电话过去。<br>她刚好不在。</p>
+<p>过了几秒，就反打回来。</p>
+<p>时时默契，我把这个也当作礼物。</p>
+<h2 id="打羽毛球"><a href="#打羽毛球" class="headerlink" title="打羽毛球"></a>打羽毛球</h2><p>我问她：打羽毛球打得酸不酸？</p>
+<p>她很气愤的说：我七点半才去，打了还没20分钟。<br>接着说：然后我们就去吃大餐了。 —— 自己给笑了。<br>又自豪地说：不过我有节制的，没吃那么多。</p>
+<p>我刚要表扬她终于想通了。<br>她立马接着说：因为我要留着肚子周末去广州大吃。。。</p>
+<p>这套路太深。</p>
+]]></content>
     </entry>
     
     <entry>
@@ -286,8 +300,24 @@
     </entry>
     
     <entry>
+      <title><![CDATA[ssh免密码登录]]></title>
+      <url>http://yoursite.com/2016/07/01/ssh%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</url>
+      <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>总是需要登录服务器部署项目。<br>直接使用Terminal来进行ssh连接，<br>每次都要输入ip + port + name + password 好烦。<br>配置一下实现快速登录。</p>
+<a id="more"></a>
+<h2 id="step-1"><a href="#step-1" class="headerlink" title="step_1"></a>step_1</h2><p>由于可能有多个项目，需要配置一些环境变量。<br>之前都是直接写在<code>~/.bash_profile</code> 或 <code>~/.zshrc</code>。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 比如，我在Work文件夹中创建了一个名为config的新文件夹。</div><div class="line"># 为每个项目创建一个 xx.sh文件：</div><div class="line">ocam.sh</div><div class="line">hive.sh</div><div class="line"></div><div class="line"></div><div class="line"># 然后在`~/.bash_profile` 或 `~/.zshrc` 里把这些项目的配置文件加进来。</div><div class="line">for file in /Work/config/*.sh; do</div><div class="line">  source $file;</div><div class="line">done</div><div class="line"></div><div class="line"># 这样就把每个文件给加进来了。</div><div class="line"># ps:这些配置文件还有个大作用，为每个项目取相应操作的别名。</div></pre></td></tr></table></figure>
+<h2 id="step-2"><a href="#step-2" class="headerlink" title="step_2"></a>step_2</h2><p>生成公钥/密钥对</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">cd ~/.ssh</div><div class="line"></div><div class="line"># C是注释，f是文件名（不同项目使用不同的文件名）</div><div class="line">ssh-keygen -t rsa -C ocam -f ocam_id_rsa </div><div class="line"></div><div class="line"># 指定不同服务器使用不同的公钥/密钥对</div><div class="line"># 在ssh_config中配置。（ssh_config不存在新增即可）</div><div class="line"></div><div class="line">Host 111.22.333.44</div><div class="line">PreferredAuthentications publickey</div><div class="line">IdentityFile ~/.ssh/ocam_id_rsa</div><div class="line">Port 99</div></pre></td></tr></table></figure>
+<h2 id="step-3"><a href="#step-3" class="headerlink" title="step_3"></a>step_3</h2><p>将生成的<code>公钥</code>放到服务器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/ocam_id_rsa.pub | ssh -t root@111.22.333.44 -p 99 &apos;cat &gt;&gt; .ssh/authorized_keys&apos;</div></pre></td></tr></table></figure>
+<h2 id="step-4"><a href="#step-4" class="headerlink" title="step_4"></a>step_4</h2><p>在第一步创建的ocam.sh中,添加进入服务器的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">alias ocam_test_server=&quot;ssh -t root@111.22.333.44 -p 99&quot;</div><div class="line"></div><div class="line">PS:</div><div class="line">使用简单易记的命令来代替复杂的命令。</div><div class="line">比如：启动redis实例， 启动webpack</div><div class="line">alias ocam_js=&quot;sh Work/ocam/run_script.sh&quot; # webpack</div><div class="line">alias ocam_db=&quot;sh Work/ocam/run_db_script.sh&quot; # 重置数据库</div><div class="line">alias ocam_redis=&quot;sh Work/ocam/run_redis_script.sh&quot; # 启动redis实例</div></pre></td></tr></table></figure></p>
+<h2 id="step-5"><a href="#step-5" class="headerlink" title="step_5"></a>step_5</h2><p>以后如果要登录某个项目的服务器，直接打开Terminal, 执行<code>ocam_test_server</code>就可以了。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Day-4-17]]></title>
-      <url>http://yoursite.com/2016/07/01/Day-4-17/</url>
+      <url>http://yoursite.com/2016/04/17/Day-4-17/</url>
       <content type="html"><![CDATA[<p>突然的，又无从下笔。<br>白天看到每一件事都有好多想法，现在回想起来就模模糊糊。</p>
 <p><strong>每天晚上这静静的一个小时，我让今天留下了什么？</strong></p>
 <a id="more"></a>
@@ -324,18 +354,28 @@
     </entry>
     
     <entry>
-      <title><![CDATA[ssh免密码登录]]></title>
-      <url>http://yoursite.com/2016/07/01/My-New-Post/</url>
-      <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>总是需要登录服务器部署项目。<br>直接使用Terminal来进行ssh连接，<br>每次都要输入ip + port + name + password 好烦。<br>配置一下实现快速登录。</p>
+      <title><![CDATA[Day-2-20]]></title>
+      <url>http://yoursite.com/2016/02/20/Day-2-20/</url>
+      <content type="html"><![CDATA[<h2 id="one（去了1200bookshop）"><a href="#one（去了1200bookshop）" class="headerlink" title="one（去了1200bookshop）"></a>one（去了1200bookshop）</h2><p>跟龙兄晃悠晃悠地来到了广州的不打烊书店。一路期待与欣喜。<br>门店不大，一入门，两边放着诗歌 跟 哲学书，这个，格调有点高了吧。</p>
+<p>正面就是一条往上的楼梯，旁边放着书。<br>ps：这种感觉太好了，一直很喜欢这种随地放置书籍的布置感。</p>
+<p>一上楼梯，一股浓浓的咖啡味扑鼻而来。<br>原来，咖啡也可以是这么好闻的。</p>
 <a id="more"></a>
-<h2 id="step-1"><a href="#step-1" class="headerlink" title="step_1"></a>step_1</h2><p>由于可能有多个项目，需要配置一些环境变量。<br>之前都是直接写在<code>~/.bash_profile</code> 或 <code>~/.zshrc</code>。 – – 感觉如果项目一多，会很杂。所以把每个项目的配置抽出来单独一个文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 比如，我在Work文件夹中创建了一个名为config的新文件夹。</div><div class="line"># 为每个项目创建一个 xx.sh文件：</div><div class="line">ocam.sh</div><div class="line">hive.sh</div><div class="line"></div><div class="line"></div><div class="line"># 然后在`~/.bash_profile` 或 `~/.zshrc` 里把这些项目的配置文件加进来。</div><div class="line">for file in /Work/config/*.sh; do</div><div class="line">  source $file;</div><div class="line">done</div><div class="line"></div><div class="line"># 这样就把每个文件给加进来了。</div><div class="line"># ps:这些配置文件还有个大作用，为每个项目取相应操作的别名。</div></pre></td></tr></table></figure>
-<h2 id="step-2"><a href="#step-2" class="headerlink" title="step_2"></a>step_2</h2><p>生成公钥/密钥对</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">cd ~/.ssh</div><div class="line"></div><div class="line"># C是注释，f是文件名（不同项目使用不同的文件名）</div><div class="line">ssh-keygen -t rsa -C ocam -f ocam_id_rsa </div><div class="line"></div><div class="line"># 指定不同服务器使用不同的公钥/密钥对</div><div class="line"># 在ssh_config中配置。（ssh_config不存在新增即可）</div><div class="line"></div><div class="line">Host 111.22.333.44</div><div class="line">PreferredAuthentications publickey</div><div class="line">IdentityFile ~/.ssh/ocam_id_rsa</div><div class="line">Port 99</div></pre></td></tr></table></figure>
-<h2 id="step-3"><a href="#step-3" class="headerlink" title="step_3"></a>step_3</h2><p>将生成的<code>公钥</code>放到服务器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/ocam_id_rsa.pub | ssh -t root@111.22.333.44 -p 99 &apos;cat &gt;&gt; .ssh/authorized_keys&apos;</div></pre></td></tr></table></figure>
-<h2 id="step-4"><a href="#step-4" class="headerlink" title="step_4"></a>step_4</h2><p>在第一步创建的ocam.sh中,添加进入服务器的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">alias ocam_test_server=&quot;ssh -t root@111.22.333.44 -p 99&quot;</div><div class="line"></div><div class="line">PS:</div><div class="line">使用简单易记的命令来代替复杂的命令。</div><div class="line">比如：启动redis实例， 启动webpack</div><div class="line">alias ocam_js=&quot;sh Work/ocam/run_script.sh&quot; # webpack</div><div class="line">alias ocam_db=&quot;sh Work/ocam/run_db_script.sh&quot; # 重置数据库</div><div class="line">alias ocam_redis=&quot;sh Work/ocam/run_redis_script.sh&quot; # 启动redis实例</div></pre></td></tr></table></figure></p>
-<h2 id="step-5"><a href="#step-5" class="headerlink" title="step_5"></a>step_5</h2><p>以后如果要登录某个项目的服务器，直接打开Terminal, 执行<code>ocam_test_server</code>就可以了。</p>
+<p>书籍不算多，工作人员说还有一家大很多的分店。<br>但是还是能够我满足玩逛书的心情的。</p>
+<p>挑着书，翻着书。<br>我将如何去为我的书安家？</p>
+<p>小小书屋，给广州带来又一处文艺青年的安身之处。<br>谢谢1200bookshop。</p>
+<p>核心：为背包客提供一个安身之处。</p>
+<h2 id="two"><a href="#two" class="headerlink" title="two"></a>two</h2><p>阿西莫夫跟达芬奇一样，都是全能型的超级人物。得找找他们的事迹。<br>《基地》中，每一个国家，总是在看起来国势最盛多时候，开始埋下衰败的种子。<br>使这个国家强盛的理由，有时恰恰也是使它失败的原因。</p>
+<h3 id="three"><a href="#three" class="headerlink" title="three"></a>three</h3><p>生命本来就像圆周率一样无穷无尽，任何形式都容纳不下它。<br>找个时间，重新看看《少年派的奇幻漂流》。</p>
+<h2 id="four"><a href="#four" class="headerlink" title="four"></a>four</h2><p>犹豫不定时，就挑比较困难的那件事吧。即使失败，也是完成一次挑战，历练了自己。<br>幸福时要时时分享的。<br>今天你真的守护你决定最重要的事情了么？</p>
+<h2 id="five（小林一茶）"><a href="#five（小林一茶）" class="headerlink" title="five（小林一茶）"></a>five（小林一茶）</h2><p>小林一茶。<br>坎坷的一生。<br>3岁丧母，后又被继母赶出家门，61岁时小他20岁的妻子早逝，65岁时家屋连同财产尽付一炬。<br>最悲惨的是他的四个孩子，全部夭折。</p>
+<blockquote>
+<p>我知这世界，本如露水般短暂。<br>然而。<br>然而。    </p>
+</blockquote>
+<p>这是我见过，最难受的三句话。</p>
+<h2 id="six-《月亮与六便士》"><a href="#six-《月亮与六便士》" class="headerlink" title="six(《月亮与六便士》)"></a>six(《月亮与六便士》)</h2><p>今天，算是认识到毛姆大叔了。</p>
+<blockquote>
+<p>只有诗人或圣徒，<br>才会坚定不移地相信，<br>在沥青路上浇水，<br>能种出百合花来。</p>
+</blockquote>
 ]]></content>
     </entry>
     
