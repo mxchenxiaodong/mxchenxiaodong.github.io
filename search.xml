@@ -4,6 +4,122 @@
   
     
     <entry>
+      <title><![CDATA[pry小问题]]></title>
+      <url>http://yoursite.com/2016/09/01/pry%E5%B0%8F%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>最近遇到一个小问题：</p>
+<p>平时进行项目断点调试的时候，都是使用pry的。突然有一天，发现rails项目 跟 ruby项目不能同时进行断点。</p>
+<p>解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gem list pry # 查看一下相关包</div><div class="line"></div><div class="line"># 把一些类似pry-byebug, pry-rails卸载掉。</div><div class="line">gem uninstall pry-byebug</div><div class="line">gem uninstall pry-rails</div><div class="line"></div><div class="line"># 只保留 pry,pry-nav</div><div class="line"># 这样子就rails项目 跟 ruby项目都可以正常使用了。</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[concern]]></title>
+      <url>http://yoursite.com/2016/08/29/concern/</url>
+      <content type="html"><![CDATA[<p>concern的通用模式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">module </div><div class="line">    </div><div class="line">    def self.included(base)</div><div class="line">        base.send(:include, InstanceMethods)</div><div class="line"></div><div class="line">        base.extend(ClassMethods)</div><div class="line"></div><div class="line">        base.eval_class do</div><div class="line">            scope :active, where(is_active: true)</div><div class="line">        end</div><div class="line">    end</div><div class="line"></div><div class="line">    module InstanceMethods</div><div class="line">    end</div><div class="line"></div><div class="line">    module ClassMethods</div><div class="line">    end</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[redis incr]]></title>
+      <url>http://yoursite.com/2016/07/21/redis-incr/</url>
+      <content type="html"><![CDATA[<p>redis incr key</p>
+<ul>
+<li>原子性（atomicity）：一个事务是一个不可分割的最小工作单位，事务中包括的诸操作要么都做，要么都不做。</li>
+<li>Redis所有单个命令的执行都是<code>原子性</code>的，这与它的<code>单线程机制</code>有关；</li>
+<li>Redis命令的原子性使得我们<code>不用考虑并发问题</code>，可以方便的利用原子性自增操作INCR实现简单计数器功能;</li>
+</ul>
+<p><a href="http://www.yunsonbai.top/2016/05/20/redis-incr/" target="_blank" rel="external">http://www.yunsonbai.top/2016/05/20/redis-incr/</a><br><a href="http://www.kuqin.com/shuoit/20150104/344227.html" target="_blank" rel="external">http://www.kuqin.com/shuoit/20150104/344227.html</a><br><a href="https://segmentfault.com/q/1010000005075072" target="_blank" rel="external">https://segmentfault.com/q/1010000005075072</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[乐观锁与悲观锁]]></title>
+      <url>http://yoursite.com/2016/07/14/%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/</url>
+      <content type="html"><![CDATA[<p>乐观锁：其实没在数据库层面加锁，而是利用多版本号来控制并发。如果事务提交后，发现提交的版本号与数据库里面的版本号不一样（说明已经被修改过），提交失败。<br>需要给数据表加入一个字段，用来表示版本。（Rails是:lock_version,可以修改名称。）<br>需要注意的是，当使用乐观锁后提交事务失败后，可以进行重试来重新更新。</p>
+<p>(Rails 中乐观锁与悲观锁的使用)[<a href="https://ruby-china.org/topics/28963" target="_blank" rel="external">https://ruby-china.org/topics/28963</a>]<br>(乐观锁与悲观锁的区别)[<a href="http://www.cnblogs.com/Bob-FD/p/3352216.html" target="_blank" rel="external">http://www.cnblogs.com/Bob-FD/p/3352216.html</a>]</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue Learning]]></title>
+      <url>http://yoursite.com/2016/07/13/Vue-Learning/</url>
+      <content type="html"><![CDATA[<p>偷偷学看点Vue，了解一下用法。</p>
+<p>一些js的方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- trim() : 清掉空格。</div><div class="line">- splice(index, howmany, item1,.....,itemX): 从index位置起，删除几个，后面添加介个。</div></pre></td></tr></table></figure></p>
+<p>每个 Vue 实例都会代理其 data 对象里所有的属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var data = &#123; a: 1 &#125;</div><div class="line">var vm = new Vue(&#123;</div><div class="line">  data: data</div><div class="line">&#125;)</div><div class="line"></div><div class="line">vm.a === data.a // -&gt; true</div><div class="line"></div><div class="line">// 设置属性也会影响到原始数据</div><div class="line">vm.a = 2</div><div class="line">data.a // -&gt; 2</div><div class="line"></div><div class="line">// ... 反之亦然</div><div class="line">data.a = 3</div><div class="line">vm.a // -&gt; 3</div></pre></td></tr></table></figure></p>
+<p>只有这些被代理的属性是响应的。如果在实例创建之后添加新的属性到实例上，它不会触发视图更新。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[for CSS]]></title>
+      <url>http://yoursite.com/2016/07/08/for-CSS/</url>
+      <content type="html"><![CDATA[<p>记录一下。</p>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><ul>
+<li>X Y ==&gt; <code>后代选择</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">li</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">text-decoration</span>: none;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>X + Y ==&gt; <code>相邻选择</code><br>只选择紧贴在X元素之后Y元素。上面的例子，仅每一个ul之后的第一个段落元素的文本为红色。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">ul</span> + <span class="selector-tag">p</span> &#123;  </div><div class="line">   <span class="attribute">color</span>: red;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>X &gt; Y ==&gt; <code>直接子代</code><br>X Y和X &gt; Y之间的不同点是后者只选择直接子代。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span><span class="selector-id">#container</span> &gt; <span class="selector-tag">ul</span> &#123;  </div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid black;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>X ~ Y<br>兄弟选择符和X + Y一样，然而，它没有约束。与相邻选择符（ul + li）仅选择前一个选择符后面的第一个元素比起来，兄弟选择符更宽泛。它会选择跟在ul后面的任何p元素。</p>
+</li>
+</ul>
+<hr>
+<p>使用了 a:visited改变样式。<br>会改变所有相同url的a标签。</p>
+<p>一开始接触的时候a标签都href = ‘#’ , 点一个导致全部都被替换了。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[focus]]></title>
+      <url>http://yoursite.com/2016/07/07/focus/</url>
+      <content type="html"><![CDATA[<p>每天晚上好好专注一个小时。</p>
+<p>HTML元素都是小盒子。<br>重置样式表，跨浏览器。</p>
+<p>上下的margin取决于大的（会重叠）<br>左右的margin直接叠加。</p>
+<p>上下的margin一般使用em作为单位， 左右的margin使用px.<br>em会随字体的变大而变大，px不会。<br>左右margin使用px的原因是不会改变布局宽度。</p>
+<p>块级元素， 如果没有显示设置width， 默认是auto – 与父元素同宽。</p>
+<blockquote>
+<p>没有设置width的元素，始终会填满其父元素的宽度。添加边框 + 内边距 + 外边距会使内容宽度减少。</p>
+</blockquote>
+<p>设置了width之后，不会与父级同宽。width针对的是内容区宽度。</p>
+<blockquote>
+<p>因为在多栏布局中,每一栏都必须时刻维护自己的宽度。有width 跟没width是有截然不同的表现的。</p>
+</blockquote>
+<h2 id="浮动，-清除"><a href="#浮动，-清除" class="headerlink" title="浮动， 清除"></a>浮动， 清除</h2><p>就是把元素从常规文档流脱离出来。可以用来干嘛：</p>
+<ul>
+<li>实现文字绕排图片的效果。</li>
+<li>让原来<code>上下堆叠的块级元素</code>，变成<code>左右并列</code>。</li>
+</ul>
+<p>浮动元素脱离了常规文档流之后，原来紧跟在其后的元素在空间允许下，会向上提升到与浮动元素平起平坐。</p>
+<blockquote>
+<p>这里摘录 Eric 在那本书里写的一句话:“当你浮动一个元素的时候……这些(浮动)规则就好像 在说:‘尽量把这个元素往上放,能放多高放多高,直到碰到某个元素的边界为 止。’</p>
+</blockquote>
+<p>同时浮动图片和“有宽度的”段落,会导致段落的文本绕排效果消失,而浮 动的段落也会尽可能向左向上移动。就这样,这个段落就构成了紧挨着图片的一栏。 这就是使用 float 属性创建多栏布局的原理。换句话说,如果几个相邻的元素都具 有设定的宽度,都是浮动的,而且水平空间也足以容纳它们,它们就会并列排在 一行。</p>
+<h2 id="文档流"><a href="#文档流" class="headerlink" title="文档流"></a>文档流</h2><blockquote>
+<p>浮动(float)、绝对定位(absolute)、固定定位(fixed)三种方式定位会脱离文档流。</p>
+</blockquote>
+<h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>block + inline + none</p>
+<p>inline<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a </div><div class="line">span</div></pre></td></tr></table></figure></p>
+<p>none<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">把 display 设置成 none 不会保留元素本该显示的空间，但是 visibility: hidden; 还会保留</div></pre></td></tr></table></figure></p>
+<h2 id="position"><a href="#position" class="headerlink" title="position"></a>position</h2><p>核心点。</p>
+<p>static + relative + asolute + fixed</p>
+<p>relative<br>相对它原来在文档流中的位置。原来的位置还存在。而显示跑到别的地方去了。<br>top: 30px; 就是在原先的top上加上30px,相当于往下移。<br>left: 40px; 就是在原先的left上加40px,相当于右移。 </p>
+<p>asolute + fixed<br>会完全脱离文档流。原来的位置不见了。</p>
+<p>相对自己。<br>相对另一个元素（上下文元素），asolute<br>相对屏幕视口。， fixed</p>
+<h3 id="定位上下文"><a href="#定位上下文" class="headerlink" title="定位上下文"></a>定位上下文</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">给祖先元素定义 position: relative</div></pre></td></tr></table></figure>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>font-family –&gt; 字体族。<br>font-size<br>font-style –&gt; 斜体， 正体， 还是 normal</p>
+<h3 id="font-size"><a href="#font-size" class="headerlink" title="font-size"></a>font-size</h3><h3 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h3><p>绝对单位： px<br>相对单位： em, 百分比</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">默认情况下： 1em = 16px</div></pre></td></tr></table></figure>
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>掌握三栏布局。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[有趣的事情]]></title>
       <url>http://yoursite.com/2016/07/05/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%8B%E6%83%85/</url>
       <content type="html"><![CDATA[<h2 id="长城"><a href="#长城" class="headerlink" title="长城"></a>长城</h2><blockquote>
@@ -40,6 +156,9 @@
 <p>她很气愤的说：我七点半才去，打了还没20分钟。<br>接着说：然后我们就去吃大餐了。 —— 自己给笑了。<br>又自豪地说：不过我有节制的，没吃那么多。</p>
 <p>我刚要表扬她终于想通了。<br>她立马接着说：因为我要留着肚子周末去广州大吃。。。</p>
 <p>这套路太深。</p>
+<h2 id="小贴心"><a href="#小贴心" class="headerlink" title="小贴心"></a>小贴心</h2><p>我在看巴萨的录像。</p>
+<p>出去一下。</p>
+<p>她随手就把录像给暂停了。</p>
 ]]></content>
     </entry>
     
