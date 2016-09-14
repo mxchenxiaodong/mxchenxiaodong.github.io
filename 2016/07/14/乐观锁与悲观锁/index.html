@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Lock,SQL," />
 
 
 
@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Mx-Don">
 <meta property="og:description" content="乐观锁：其实没在数据库层面加锁，而是利用多版本号来控制并发。如果事务提交后，发现提交的版本号与数据库里面的版本号不一样（说明已经被修改过），提交失败。需要给数据表加入一个字段，用来表示版本。（Rails是:lock_version,可以修改名称。）需要注意的是，当使用乐观锁后提交事务失败后，可以进行重试来重新更新。
 (Rails 中乐观锁与悲观锁的使用)[https://ruby-china.or">
-<meta property="og:updated_time" content="2016-07-14T10:28:27.000Z">
+<meta property="og:updated_time" content="2016-09-14T15:18:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="乐观锁与悲观锁">
 <meta name="twitter:description" content="乐观锁：其实没在数据库层面加锁，而是利用多版本号来控制并发。如果事务提交后，发现提交的版本号与数据库里面的版本号不一样（说明已经被修改过），提交失败。需要给数据表加入一个字段，用来表示版本。（Rails是:lock_version,可以修改名称。）需要注意的是，当使用乐观锁后提交事务失败后，可以进行重试来重新更新。
@@ -290,6 +290,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -332,6 +351,14 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lock/" rel="tag">#Lock</a>
+          
+            <a href="/tags/SQL/" rel="tag">#SQL</a>
+          
+        </div>
       
 
       
@@ -433,7 +460,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
