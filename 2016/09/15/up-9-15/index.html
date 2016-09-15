@@ -102,7 +102,7 @@
 恢复stash的代码。
 
 12345git stashgit stash listgit stash popgit stash pop stash@&amp;#123;num&amp;#125; # 是你要恢复的操作的序号git stash">
-<meta property="og:updated_time" content="2016-09-15T06:21:49.000Z">
+<meta property="og:updated_time" content="2016-09-15T07:00:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="up-9-15">
 <meta name="twitter:description" content="git stash基本使用某些场景：正改着代码，然后有个bug.
@@ -362,6 +362,11 @@
 <li>:/^str enter –&gt; 搜索行首字符串</li>
 <li>:/str$ enter –&gt; 搜索行尾字符串</li>
 </ul>
+<a id="more"></a>
+<hr>
+<h2 id="遍历文件夹"><a href="#遍历文件夹" class="headerlink" title="遍历文件夹"></a>遍历文件夹</h2><p>今天，想整理一下文件。把分散在各个文件夹的图片合并成在一个文件夹里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for dir in */;</div><div class="line">do</div><div class="line">  echo $dir;</div><div class="line">  mv $dir/* all_images;</div><div class="line">done</div></pre></td></tr></table></figure>
+<h2 id="删除空文件夹"><a href="#删除空文件夹" class="headerlink" title="删除空文件夹"></a>删除空文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">find /my_floder -type d -empty -delete</div><div class="line"></div><div class="line">其中：</div><div class="line">  -type d  =&gt; 类型为文件夹</div><div class="line">  -empty   =&gt; 空文件夹</div><div class="line">  -delete  =&gt; 删除</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -514,7 +519,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-stash"><span class="nav-number">1.</span> <span class="nav-text">git stash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题解决"><span class="nav-number">1.2.</span> <span class="nav-text">问题解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim-查找"><span class="nav-number">2.</span> <span class="nav-text">vim 查找</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-stash"><span class="nav-number">1.</span> <span class="nav-text">git stash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题解决"><span class="nav-number">1.2.</span> <span class="nav-text">问题解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim-查找"><span class="nav-number">2.</span> <span class="nav-text">vim 查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历文件夹"><span class="nav-number">3.</span> <span class="nav-text">遍历文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除空文件夹"><span class="nav-number">4.</span> <span class="nav-text">删除空文件夹</span></a></li></ol></div>
             
           </div>
         </section>

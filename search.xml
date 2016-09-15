@@ -22,6 +22,11 @@
 <li>:/^str enter –&gt; 搜索行首字符串</li>
 <li>:/str$ enter –&gt; 搜索行尾字符串</li>
 </ul>
+<a id="more"></a>
+<hr>
+<h2 id="遍历文件夹"><a href="#遍历文件夹" class="headerlink" title="遍历文件夹"></a>遍历文件夹</h2><p>今天，想整理一下文件。把分散在各个文件夹的图片合并成在一个文件夹里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for dir in */;</div><div class="line">do</div><div class="line">  echo $dir;</div><div class="line">  mv $dir/* all_images;</div><div class="line">done</div></pre></td></tr></table></figure>
+<h2 id="删除空文件夹"><a href="#删除空文件夹" class="headerlink" title="删除空文件夹"></a>删除空文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">find /my_floder -type d -empty -delete</div><div class="line"></div><div class="line">其中：</div><div class="line">  -type d  =&gt; 类型为文件夹</div><div class="line">  -empty   =&gt; 空文件夹</div><div class="line">  -delete  =&gt; 删除</div></pre></td></tr></table></figure>
 ]]></content>
     </entry>
     
