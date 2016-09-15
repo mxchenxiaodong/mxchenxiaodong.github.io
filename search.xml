@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title><![CDATA[up-9-15]]></title>
+      <url>http://yoursite.com/2016/09/15/up-9-15/</url>
+      <content type="html"><![CDATA[<h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>某些场景：<br>正改着代码，然后有个bug.</p>
+<ul>
+<li>使用stash保存现在的代码 –&gt; 新代码没有提交；工作区恢复为原状。</li>
+<li>修改bug,并提交新代码。</li>
+<li>恢复stash的代码。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git stash</div><div class="line">git stash list</div><div class="line">git stash pop</div><div class="line">git stash pop stash@&#123;num&#125; # 是你要恢复的操作的序号</div><div class="line">git stash clear # 清理不必要的stash</div></pre></td></tr></table></figure>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>如果新修改的代码 跟 stash 修改的代码有冲突。<br>git会提示先提交最新的修改。再执行stash, 会实现代码合并。</p>
+<hr>
+<h2 id="vim-查找"><a href="#vim-查找" class="headerlink" title="vim 查找"></a>vim 查找</h2><p>用vim打开文件，需要搜索某个字符串。</p>
+<ul>
+<li>:/str enter  –&gt;  输入</li>
+<li>按 n 向下搜索。 按 N 向上搜索。</li>
+<li>:/^str enter –&gt; 搜索行首字符串</li>
+<li>:/str$ enter –&gt; 搜索行尾字符串</li>
+</ul>
+<p>```</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[pry小问题]]></title>
       <url>http://yoursite.com/2016/09/01/pry%E5%B0%8F%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<p>最近遇到一个小问题：</p>
