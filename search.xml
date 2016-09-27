@@ -4,6 +4,15 @@
   
     
     <entry>
+      <title><![CDATA[some_life]]></title>
+      <url>http://yoursite.com/2016/09/27/some-life/</url>
+      <content type="html"><![CDATA[<p>What Are Words</p>
+<p><code>Chris Medina Chris Medina曾经是一件咖啡厅的服务员。2007年12月12日，他向和他相恋8年的女孩Juliana提出订婚。2009年10月2日，订婚后两年，那个美丽的女孩因为车祸事故，脑部受到重创，康复后智力只有2岁，生活完全不能够自理。但Chris不离不弃。依然选择了和她结婚。</code></p>
+<p>才发现生活还可以更糟，只要坚强。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[up-9-19]]></title>
       <url>http://yoursite.com/2016/09/19/up-9-19/</url>
       <content type="html"><![CDATA[<h2 id="MySQL导出数据库"><a href="#MySQL导出数据库" class="headerlink" title="MySQL导出数据库"></a>MySQL导出数据库</h2><h3 id="导出整个库"><a href="#导出整个库" class="headerlink" title="导出整个库"></a>导出整个库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -u[username] -p[password] databasename &gt; xxx.sql;</div></pre></td></tr></table></figure>
@@ -16,69 +25,6 @@
 </ul>
 <p>找出1个小时内的记录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from records where created_at &gt; (DATE_SUB(NOW(), INTERVAL 1 HOUR));</div></pre></td></tr></table></figure></p>
 <h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">scp -P port username@host:from_file  to_dir;</div><div class="line"></div><div class="line">#example</div><div class="line">scp -P 22 root@120.120.120.120:/root/xxx.sql  /Users/Don/Work;</div><div class="line"></div><div class="line">#注意：</div><div class="line">-P: 是大写的，指定端口.</div></pre></td></tr></table></figure>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[todo]]></title>
-      <url>http://yoursite.com/2016/09/17/todo/</url>
-      <content type="html"><![CDATA[<p>学习要有目的。<br>通过实现小功能来学习新的东西。</p>
-<h2 id="ruby"><a href="#ruby" class="headerlink" title="ruby"></a>ruby</h2><ul>
-<li>什么是duck typing</li>
-<li>多线程的东西。ruby的多线程。</li>
-<li>文件加载方式</li>
-<li>常量寻找的方式</li>
-</ul>
-<h2 id="rails"><a href="#rails" class="headerlink" title="rails"></a>rails</h2><ul>
-<li>scope实现</li>
-<li>路由系统</li>
-</ul>
-<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><ul>
-<li>实现自己的web服务器</li>
-</ul>
-<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><ul>
-<li>策略模式</li>
-</ul>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[T]]></title>
-      <url>http://yoursite.com/2016/09/17/T/</url>
-      <content type="html"><![CDATA[<h2 id="每天小坚持"><a href="#每天小坚持" class="headerlink" title="每天小坚持"></a>每天小坚持</h2><ul>
-<li>每天有输入: 新鲜东西。</li>
-<li>每天有输出: 写一篇简短博客，整理小知识点。</li>
-</ul>
-<h2 id="提醒"><a href="#提醒" class="headerlink" title="提醒"></a>提醒</h2><ul>
-<li>通过倒数计算，时间不宜太短，也不宜太长。以一个月为标准。</li>
-<li>设立周目标。</li>
-<li>80%专 + 20%广。</li>
-<li>提高工作的效率。</li>
-<li>对每天接触的东西，需要熟练于心；也需要每天接触新的点。</li>
-</ul>
-<h2 id="要点："><a href="#要点：" class="headerlink" title="要点："></a>要点：</h2><ul>
-<li>rails源码</li>
-<li>git工作流</li>
-<li>Linux</li>
-<li>MySQL + redis + mongodb</li>
-<li>单元测试</li>
-</ul>
-<h2 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍:"></a>参考书籍:</h2><ul>
-<li>《ruby元编程》</li>
-<li>《ruby设计模式》</li>
-<li>《重构》</li>
-<li>《shell脚本攻略》</li>
-<li>《git》</li>
-</ul>
-<h2 id="九月份"><a href="#九月份" class="headerlink" title="九月份"></a>九月份</h2><h3 id="倒数第二周"><a href="#倒数第二周" class="headerlink" title="倒数第二周"></a>倒数第二周</h3><p>慢慢从研究rails框架源码入手，多看大神源码。<br>工作期间的精力投入。</p>
-<ul>
-<li>scope实现</li>
-<li>《ruby元编程》一章</li>
-<li>shell</li>
-</ul>
-<h3 id="倒数第一周"><a href="#倒数第一周" class="headerlink" title="倒数第一周"></a>倒数第一周</h3><ul>
-<li>路由系统</li>
-</ul>
 ]]></content>
     </entry>
     
