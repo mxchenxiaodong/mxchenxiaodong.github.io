@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Mx-Don">
 <meta property="og:description" content="使用mini_magick进行图片的处理今天需要处理一些图片，一张一张手动太不划算。使用mini_magick处理了一下。
 1234567891011Dir[&apos;/worker/demo/*.jpeg&apos;].each do |file|  image = MiniMagick::Image.open(file)  image.shave &quot;0x280&quot;                     # 需要">
-<meta property="og:updated_time" content="2016-09-28T12:56:20.000Z">
+<meta property="og:updated_time" content="2016-09-28T13:05:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2016-09-28">
 <meta name="twitter:description" content="使用mini_magick进行图片的处理今天需要处理一些图片，一张一张手动太不划算。使用mini_magick处理了一下。
@@ -336,6 +336,14 @@
 <h2 id="使用nginx访问静态图片"><a href="#使用nginx访问静态图片" class="headerlink" title="使用nginx访问静态图片"></a>使用nginx访问静态图片</h2><p>服务器的目录<code>/data/images</code>下有一张demo1.jpg的图片。<br>浏览器这样访问即可：<code>image.xxx.com/demo1.jpg</code>.</p>
 <p>nginx会进行目录搜索，找到图片。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen  80;</div><div class="line">  server_name image.xxx.com;  # 配置域名</div><div class="line"></div><div class="line">  location / &#123;</div><div class="line">      root   /data/images;    # 服务器存放图片的地方。</div><div class="line">      expires 4d;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="What-Are-Words"><a href="#What-Are-Words" class="headerlink" title="What Are Words"></a>What Are Words</h2><p>突然。<br>天足的这篇《男人四十》，一首《What Are Words》,<br>见证过的，确实是以群星装点绿茵场的足球盛世年华。</p>
+<p>76黄金一代。</p>
+<p>20岁的罗纳尔多赢取世界足球先生，是多少人终生不能企及的荣誉。<br>欧冠决赛场上，一位18岁的少年一脚定乾坤，他叫克鲁伊维特。<br>巨星闪耀的诺坎普。巴塞罗那0:4输给基辅迪纳摩，攻入四球的是同一个人，那是舍甫琴科。</p>
+<p>30岁之后，只是时间突然加快了脚步。</p>
+<p>老兵永远不死，<br>只是慢慢凋零。</p>
+<h3 id="歌背后的故事"><a href="#歌背后的故事" class="headerlink" title="歌背后的故事"></a>歌背后的故事</h3><p>Chris Medina曾经是一件咖啡厅的服务员。2007年12月12日，他向和他相恋8年的女孩Juliana提出订婚。2009年10月2日，订婚后两年，那个美丽的女孩因为车祸事故，脑部受到重创，康复后智力只有2岁，生活完全不能够自理。但Chris不离不弃。依然选择了和她结婚。</p>
+<hr>
+<p>人生如期，我愿为卒。<br>即使生活太难，你何曾见我后退一步。</p>
 
       
     </div>
@@ -370,8 +378,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/27/some-life/" rel="next" title="some_life">
-                <i class="fa fa-chevron-left"></i> some_life
+              <a href="/2016/09/19/up-9-19/" rel="next" title="up-9-19">
+                <i class="fa fa-chevron-left"></i> up-9-19
               </a>
             
           </div>
@@ -444,7 +452,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -490,7 +498,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用mini-magick进行图片的处理"><span class="nav-number">1.</span> <span class="nav-text">使用mini_magick进行图片的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用nginx访问静态图片"><span class="nav-number">2.</span> <span class="nav-text">使用nginx访问静态图片</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用mini-magick进行图片的处理"><span class="nav-number">1.</span> <span class="nav-text">使用mini_magick进行图片的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用nginx访问静态图片"><span class="nav-number">2.</span> <span class="nav-text">使用nginx访问静态图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-Are-Words"><span class="nav-number">3.</span> <span class="nav-text">What Are Words</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#歌背后的故事"><span class="nav-number">3.1.</span> <span class="nav-text">歌背后的故事</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
