@@ -4,6 +4,17 @@
   
     
     <entry>
+      <title><![CDATA[2016-09-28]]></title>
+      <url>http://yoursite.com/2016/09/28/2016-09-28/</url>
+      <content type="html"><![CDATA[<h2 id="使用mini-magick进行图片的处理"><a href="#使用mini-magick进行图片的处理" class="headerlink" title="使用mini_magick进行图片的处理"></a>使用mini_magick进行图片的处理</h2><p>今天需要处理一些图片，一张一张手动太不划算。使用<code>mini_magick</code>处理了一下。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Dir[<span class="string">'/worker/demo/*.jpeg'</span>].each <span class="keyword">do</span> <span class="params">|file|</span></div><div class="line"></div><div class="line">  image = MiniMagick::Image.open(file)</div><div class="line"></div><div class="line">  image.shave <span class="string">"0x280"</span>                     <span class="comment"># 需要先裁剪一下。左右不裁剪，上下裁剪280</span></div><div class="line">  image.resize <span class="string">"640x480"</span>                  <span class="comment"># 变成这个比例</span></div><div class="line"></div><div class="line">  old_name = File.basename(file, <span class="string">".jpeg"</span>) <span class="comment"># demo/1.jepg =&gt; 1</span></div><div class="line">  image.format <span class="string">"jpg"</span></div><div class="line">  image.write <span class="string">"/demo_handle/<span class="subst">#&#123;old_name&#125;</span>.jpg"</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="使用nginx访问静态图片"><a href="#使用nginx访问静态图片" class="headerlink" title="使用nginx访问静态图片"></a>使用nginx访问静态图片</h2><p>服务器的目录<code>/data/images</code>下有一张demo1.jpg的图片。<br>浏览器这样访问即可：<code>image.xxx.com/demo1.jpg</code>.</p>
+<p>nginx会进行目录搜索，找到图片。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen  80;</div><div class="line">  server_name image.xxx.com;  # 配置域名</div><div class="line"></div><div class="line">  location / &#123;</div><div class="line">      root   /data/images;    # 服务器存放图片的地方。</div><div class="line">      expires 4d;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[some_life]]></title>
       <url>http://yoursite.com/2016/09/27/some-life/</url>
       <content type="html"><![CDATA[<p>What Are Words</p>
