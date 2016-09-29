@@ -4,6 +4,20 @@
   
     
     <entry>
+      <title><![CDATA[2016-09-29]]></title>
+      <url>http://yoursite.com/2016/09/29/2016-09-29/</url>
+      <content type="html"><![CDATA[<h2 id="使用定时任务删除超过规定天数的日志。"><a href="#使用定时任务删除超过规定天数的日志。" class="headerlink" title="使用定时任务删除超过规定天数的日志。"></a>使用定时任务删除超过规定天数的日志。</h2><p>在项目中，将日志分割成每周一个文档。格式如下：</p>
+<ul>
+<li>worker.log</li>
+<li>worker.log.20160806</li>
+</ul>
+<p>step-1: 创建需要定时执行的脚本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">touch auto_del_30_days_ago_log.sh</div><div class="line">chmod +x auto_del_30_days_ago_log.sh</div><div class="line">vim auto_del_30_days_ago_log.sh</div><div class="line"></div><div class="line">打开文件，添加内容：</div><div class="line"></div><div class="line">#!/bin/sh</div><div class="line">find /mnt/www/web/log -mtime +30 -name &apos;*.log*&apos; -exec rm &#123;&#125; \;</div></pre></td></tr></table></figure></p>
+<p>step-2: 使用crontab定时删除。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 打开当前用户的定时文件</div><div class="line">crontab -e</div><div class="line"></div><div class="line"># 在文件中添加</div><div class="line">30 3 * * * /mnt/auto_del_30_days_ago_log.sh &gt;/dev/null 2&gt;&amp;1</div><div class="line"></div><div class="line"># 保存之后会自动执行</div></pre></td></tr></table></figure></p>
+<h3 id="find-命令怎么使用？"><a href="#find-命令怎么使用？" class="headerlink" title="find 命令怎么使用？"></a>find 命令怎么使用？</h3><h3 id="crontab怎么使用？"><a href="#crontab怎么使用？" class="headerlink" title="crontab怎么使用？"></a>crontab怎么使用？</h3><h3 id="dev-null-2-gt-amp-1-是什么意思？"><a href="#dev-null-2-gt-amp-1-是什么意思？" class="headerlink" title="/dev/null 2&gt;&amp;1 是什么意思？"></a>/dev/null 2&gt;&amp;1 是什么意思？</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html" target="_blank" rel="external">Linux工具快速教程</a><br><a href="http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html" target="_blank" rel="external">crontab命令</a><br><a href="http://www.cnblogs.com/peida/archive/2012/11/14/2769248.html" target="_blank" rel="external">find命令之exec</a><br><a href="http://www.cnblogs.com/peida/archive/2013/03/25/2980121.html" target="_blank" rel="external">自动删除n天前日志</a><br><a href="http://jianjian.blog.51cto.com/35031/103231" target="_blank" rel="external">linux中ctime,mtime,atime的区别</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[2016-09-28]]></title>
       <url>http://yoursite.com/2016/09/28/2016-09-28/</url>
       <content type="html"><![CDATA[<h2 id="使用mini-magick进行图片的处理"><a href="#使用mini-magick进行图片的处理" class="headerlink" title="使用mini_magick进行图片的处理"></a>使用mini_magick进行图片的处理</h2><p>今天需要处理一些图片，一张一张手动太不划算。使用<code>mini_magick</code>处理了一下。</p>
